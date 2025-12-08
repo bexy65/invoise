@@ -1,0 +1,57 @@
+# ------------------------------------
+# OS FILES
+# ------------------------------------
+.DS_Store
+Thumbs.db
+
+# ------------------------------------
+# COMPOSER
+# ------------------------------------
+/vendor/
+/composer.lock
+
+# ------------------------------------
+# ENV / CONFIG
+# DO NOT COMMIT CREDENTIALS
+# ------------------------------------
+.env
+.env.*
+/config/*.local.php
+/config/*.secret.php
+
+# ------------------------------------
+# CACHE / LOGS
+# ------------------------------------
+/storage/cache/
+/storage/logs/
+*.log
+
+# ------------------------------------
+# PHP GENERATED FILES
+# ------------------------------------
+*.cache
+*.tmp
+*.bak
+*.swp
+*.swo
+
+# ------------------------------------
+# NODE (if you have frontend tooling)
+# ------------------------------------
+/node_modules/
+npm-debug.log
+yarn-error.log
+
+# ------------------------------------
+# IDE / EDITOR FILES
+# ------------------------------------
+/.idea/
+/.vscode/
+/*.code-workspace
+*.iml
+
+# ------------------------------------
+# DIST / BUILD
+# ------------------------------------
+/public/build/
+/public/assets/cache/
