@@ -1,5 +1,27 @@
-<?php include("components/header.php") ?>
+<?php
+include("components/header.php") 
+?>
 
-<h1 class="border">My index page</h1>
+<div class="row border justify-content-center align-items-center">
+    <form class="col-12 col-md-8 col-lg-6">
+        <?php set_csrf(); ?>
+        <div class="mb-3">
+            <label for="emailInput" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="emailInput" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+            <label for="passwordInput" class="form-label">Password</label>
+            <input type="password" class="form-control" id="passwordInput">
+        </div>
+        <div class="row text-center">
+            <div class="col-12 col-lg-6 mb-2 mb-lg-0">
+                <button type="submit" class="col-12 btn btn-primary">Login</button>
+            </div>
+            <div class="col-12 col-lg-6">
+                <button type="submit" class="col-12 btn btn-secondary">Register</button>
+            </div>
+        </div>
+    </form>
+</div>
 
 <?php include("components/footer.php") ?>
