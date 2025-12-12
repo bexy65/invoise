@@ -1,5 +1,9 @@
 <?php
 
+if (session_status() === PHP_SESSION_NONE) {
+	session_start();
+}
+
 function get($route, $path_to_include)
 {
 	if ($_SERVER['REQUEST_METHOD'] == 'GET') {
@@ -91,7 +95,9 @@ function out($text)
 
 function set_csrf()
 {
-	session_start();
+	if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
 	if (!isset($_SESSION["csrf"])) {
 		$_SESSION["csrf"] = bin2hex(random_bytes(50));
 	}
@@ -100,7 +106,9 @@ function set_csrf()
 
 function is_csrf_valid()
 {
-	session_start();
+	if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
 	if (!isset($_SESSION['csrf']) || !isset($_POST['csrf'])) {
 		return false;
 	}

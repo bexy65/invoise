@@ -1,5 +1,9 @@
 <?php
 $config = require __DIR__ . "/../../config/app.php";
+include __DIR__ . "/../../auth.php";
+if (session_status() === PHP_SESSION_NONE) {
+  session_start();
+}
 
 ?>
 
@@ -39,6 +43,19 @@ $config = require __DIR__ . "/../../config/app.php";
             <li class="nav-item">
               <a class="nav-link" href="/login">Join Us</a>
             </li>
+
+            <?php if(isLoggedIn()): ?>
+              <li class="nav-item">
+                <!-- <a class="nav-link" href="/account-settings">Profile</a> -->
+
+                <!-- <p><?php echo $_SESSION['user']['username'] ?> </p> -->
+
+                <form action="/logout" method="POST" style="display:inline;">
+                  <button type="submit" class="btn btn-link nav-link">Logout</button>
+                </form>
+              </li>
+            <?php endif ?>
+            
           </ul>
         </div>
       </div>

@@ -3,7 +3,7 @@ include("components/header.php")
 ?>
 
 <div class="row border justify-content-center align-items-center">
-    <form action="/user" method="POST" class="col-12 col-md-8 col-lg-6">
+    <form action="/login" method="POST" class="col-12 col-md-8 col-lg-6">
         <?php set_csrf(); ?>
 
         <?php if (!empty($_GET['error'])): ?>
@@ -17,7 +17,7 @@ include("components/header.php")
         <?php if (!empty($_GET['success'])): ?>
         <div class="mb-3">
             <div class="alert alert-success">
-                Logged in!
+                Successfully created account!
             </div>
         </div>
         <?php endif; ?>
@@ -35,7 +35,7 @@ include("components/header.php")
                 <button type="submit" class="col-12 btn btn-primary">Login</button>
             </div>
             <div class="col-12 col-lg-6">
-                <a href="/register" class="col-12 btn btn-secondary">Register</a>
+                <a href="/create-user" class="col-12 btn btn-secondary">Register</a>
             </div>
         </div>
     </form>
