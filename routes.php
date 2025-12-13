@@ -6,6 +6,9 @@ get('/', 'views/index.php');
 get('/login', 'views/login.php');
 get('/create-user', 'views/register.php');
 
+get('/account-settings', 'views/accountSettings.php');
+get('/dashboard', 'views/dashboard.php');
+
 post('/create-user', 'auth.php');
 
 // POST endpoints handled by auth.php

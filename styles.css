@@ -1,7 +1,28 @@
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 18px;
+}
+
+p,
+h1,
+h2,
+h3,
+h4 {
+  margin: 0px;
+}
+
+a,
+li {
+  text-decoration: none;
+  list-style: none;
 }
 
 .main-container {
   height: 100%;
+}
+
+@media (max-width: 768px) {
+  body {
+    font-size: 16px; /* or 14px */
+  }
 }
