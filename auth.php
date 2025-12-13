@@ -3,12 +3,12 @@ if (session_status() === PHP_SESSION_NONE) session_start();
 
 $user = [
     'username'   => 'username',
-    'first_name' => 'John',
+    'first_name' => 'Johnn',
     'last_name'  => 'Doe',
     'email'      => 'email@email.com',
     'age'        => 21,
     'role'       => 1,
-    'password'   => password_hash('1234', PASSWORD_DEFAULT)
+    'password'   => password_hash('123456', PASSWORD_DEFAULT)
 ];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -80,11 +80,15 @@ function handleRegister() {
 
 // ---------- AUTH FUNCTIONS ----------
 
+// TODO: Get user from data base!
 function loginUser($email, $password, $user) {
     if ($email !== $user['email'] || !password_verify($password, $user['password'])) {
+        $_SESSION['errors']['login'] = 'Incorrect credentials!';  
+        header('Location: /login?error=1');
         return false;
     }
     $_SESSION['user'] = $user;
+    header('Location: /dashboard');
     return true;
 }
 
