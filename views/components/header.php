@@ -28,32 +28,37 @@ if (session_status() === PHP_SESSION_NONE) {
   <div class="">
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
       <div class="container-fluid">
-        <a class="navbar-brand" href="/">Invoise</a>
+        <a class="navbar-brand" href="<?= isset($_SESSION['user']) ? '/dashboard' : '/' ?>">Invoise</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
           <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="/">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Pricing</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/login">Join Us</a>
-            </li>
+            <?php if(!isLoggedIn()): ?>
+
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="/">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Pricing</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/login">Join Us</a>
+              </li>
+
+            <?php endif ?>
 
             <?php if(isLoggedIn()): ?>
+
               <li class="nav-item">
-                <!-- <a class="nav-link" href="/account-settings">Profile</a> -->
-
-                <!-- <p><?php echo $_SESSION['user']['username'] ?> </p> -->
-
+                <a class="nav-link" href="/account-settings"><?php echo $_SESSION['user']['first_name'] ?></a>
+              </li>
+              <li class="nav-item">
                 <form action="/logout" method="POST" style="display:inline;">
                   <button type="submit" class="btn btn-link nav-link">Logout</button>
                 </form>
               </li>
+
             <?php endif ?>
             
           </ul>
@@ -61,5 +66,5 @@ if (session_status() === PHP_SESSION_NONE) {
       </div>
     </nav>
   </div>
-  <div class="container min-vh-100">
+  <div class="container min-vh-100 py-4">
 
