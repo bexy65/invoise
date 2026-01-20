@@ -8,6 +8,7 @@ get('/create-user', 'views/register.php');
 
 get('/account-settings', 'views/accountSettings.php');
 get('/dashboard', 'views/dashboard.php');
+get('/show-invoise', 'views/invoise.php');
 
 post('/create-user', 'auth.php');
 

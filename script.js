@@ -1,41 +1,37 @@
-$("#createBtn").click(function () {
-  $("#invoiceEngine").toggle();
-  $("#invoiceTable").toggle();
+$(document).ready(function () {
+  // 1. Make the inputs draggable inputs cannot be dragged becaus of the input click default event prevents form dragging
+  $(".field").draggable({
+    helper: "clone", // Creates a copy while dragging
+    revert: "invalid", // Returns to start if dropped outside canvas
+    cursor: "move",
+    zIndex: 100,
+    appendTo: "#invoice-canvas",
+  });
+
+  // 2. Make the canvas droppable
+  $("#invoice-canvas").droppable({
+    accept: ".field", // Only accept elements with this class
+    drop: function (event, ui) {
+      // Clone the dragged element
+      var canvasOffset = $(this).offset();
+      var $clone = ui.helper.clone();
+      var left = ui.offset.left - canvasOffset.left;
+      var top = ui.offset.top - canvasOffset.top;
+
+      // Remove jQuery UI dragging classes and styles to reset position
+      $clone.removeClass("ui-draggable ui-draggable-dragging");
+      $clone.css({
+        position: "absolute",
+        left: left,
+        top: top,
+      });
+
+      $newItem.draggable({
+        containment: "#invoice-canvas",
+      });
+
+      // Append it to the canvas
+      $(this).append($clone);
+    },
+  });
 });
-
-$("#edit-btn").click(function () {
-  enableEditing();
-});
-
-let isEditing = false;
-
-function enableEditing() {
-  $(".draggable").draggable({ containment: "#invoice-canvas" });
-  $(".draggable").resizable({ containment: "#invoice-canvas" });
-  isEditing = true;
-}
-
-function disableEditing() {
-  $(".draggable").draggable("destroy");
-  $(".draggable").resizable("destroy");
-  isEditing = false;
-}
-
-// $("#save-btn").click(function () {
-//   disableEditing();
-//   // Save current layout HTML to server
-//   const htmlContent = $("#invoice-canvas").html();
-//   $.post("save_layout.php", { html: htmlContent }, function (response) {
-//     alert("Layout saved!");
-//   });
-// });
-
-// $("#download-btn").click(function() {
-//   if (isEditing) disableEditing(); // Ensure layout is fixed
-//   const htmlContent = $("#invoice-canvas").html();
-//   // Send HTML to PHP to generate PDF
-//   $.post("generate_pdf.php", { html: htmlContent }, function(response) {
-//     // response can be a temporary file path
-//     window.location.href = response; // download PDF
-//   });
-// });

@@ -16,7 +16,7 @@ include "components/header.php";
                 <button class="col-12 col-md-4 btn btn-secondary">My files</button>
             </div>
             <div class="col-12 col-md-6 text-md-end">
-                <button id="createBtn" class="col-12 col-md-4 btn btn-success">Create <span>+</span></button>
+                <a href="/show-invoise" class="col-12 col-md-4 btn btn-success">Create <span>+</span></a>
             </div>
         </div>
         <div id="invoiceTable" class="col-12 py-2 text-center">
@@ -52,25 +52,6 @@ include "components/header.php";
             </div>
         </div>
 
-        <div id="invoiceEngine" style="display:none;">
-        <!-- draggable invoice canvas -->
-            <h1>My invoice</h1>
-            <div id="invoice-canvas">
-                <div class="draggable resizable" style="position:absolute; top:20px; left:20px;">Invoice Title</div>
-                <div class="draggable resizable" style="position:absolute; top:100px; left:20px;">Customer Name</div>
-                <div class="draggable resizable" style="position:absolute; top:150px; left:20px;">Item Table</div>
-            </div>
-
-            <button id="edit-btn">Edit</button>
-            <button id="save-btn">Save</button>
-
-            <style>
-                #invoice-canvas { position: relative; width: 800px; height: 1100px; border: 1px solid #ccc; }
-                .draggable { cursor: move; padding: 5px; background: #f8f8f8; border: 1px solid #aaa; }
-            </style>
-
-
-        </div>
     </div>
 
 </div>
