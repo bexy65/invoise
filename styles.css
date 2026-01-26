@@ -1,6 +1,14 @@
+/* =====================
+   Base styles
+===================== */
+
+html,
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-size: 18px;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
 }
 
 p,
@@ -8,7 +16,7 @@ h1,
 h2,
 h3,
 h4 {
-  margin: 0px;
+  margin: 0;
 }
 
 a,
@@ -17,33 +25,62 @@ li {
   list-style: none;
 }
 
+/* =====================
+   Layout
+===================== */
+
 .main-container {
-  height: 100%;
+  min-height: 100vh;
 }
 
-#invoice-canvas {
-  position: relative;
-  width: 800px;
-  height: 1100px;
-  border: 1px solid #ccc;
+.invoice-box {
+  max-width: 800px;
+  margin: auto;
   background: #fff;
+  padding: 30px;
+  border: 1px solid #ddd;
 }
-
-#invoice-canvas .field {
-  width: 200px;
-  cursor: move;
-  border: 1px dashed #4a90e2;
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
 }
-
-.field {
+.header h1 {
+  margin: 0;
+}
+.company-details,
+.invoice-details {
+  font-size: 14px;
+}
+table {
   width: 100%;
-  margin-bottom: 10px;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+table th,
+table td {
+  border: 1px solid #ddd;
   padding: 10px;
-  cursor: grab;
+  text-align: left;
+}
+table th {
+  background: #f0f0f0;
+}
+.total {
+  text-align: right;
+  margin-top: 20px;
+  font-size: 16px;
+}
+.footer {
+  margin-top: 40px;
+  font-size: 12px;
+  color: #777;
+  text-align: center;
 }
 
 @media (max-width: 768px) {
+  html,
   body {
-    font-size: 16px; /* or 14px */
+    font-size: 16px;
   }
 }

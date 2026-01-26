@@ -3,12 +3,13 @@ if (session_status() === PHP_SESSION_NONE) session_start();
 
 $user = [
     'username'   => 'username',
-    'first_name' => 'Johnn',
+    'first_name' => 'John',
     'last_name'  => 'Doe',
     'email'      => 'email@email.com',
     'age'        => 21,
     'role'       => 1,
-    'password'   => password_hash('123456', PASSWORD_DEFAULT)
+    'password'   => password_hash('123456', PASSWORD_DEFAULT),
+    'company_name' => 'My company Name',
 ];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
