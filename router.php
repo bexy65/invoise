@@ -3,41 +3,20 @@
 if (session_status() === PHP_SESSION_NONE) {
 	session_start();
 }
+function method(string $httpMethod, string $route, $handler): void
+{
+    if ($_SERVER['REQUEST_METHOD'] === $httpMethod) {
+        route($route, $handler);
+    }
+}
 
-function get($route, $path_to_include)
-{
-	if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-		route($route, $path_to_include);
-	}
-}
-function post($route, $path_to_include)
-{
-	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-		route($route, $path_to_include);
-	}
-}
-function put($route, $path_to_include)
-{
-	if ($_SERVER['REQUEST_METHOD'] == 'PUT') {
-		route($route, $path_to_include);
-	}
-}
-function patch($route, $path_to_include)
-{
-	if ($_SERVER['REQUEST_METHOD'] == 'PATCH') {
-		route($route, $path_to_include);
-	}
-}
-function delete($route, $path_to_include)
-{
-	if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
-		route($route, $path_to_include);
-	}
-}
-function any($route, $path_to_include)
-{
-	route($route, $path_to_include);
-}
+function get($route, $handler)    { method('GET', $route, $handler); }
+function post($route, $handler)   { method('POST', $route, $handler); }
+function put($route, $handler)    { method('PUT', $route, $handler); }
+function patch($route, $handler)  { method('PATCH', $route, $handler); }
+function delete($route, $handler) { method('DELETE', $route, $handler); }
+function any($route, $handler)    { route($route, $handler); }
+
 function route($route, $path_to_include)
 {
 	$callback = $path_to_include;

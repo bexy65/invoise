@@ -1,9 +1,13 @@
 <?php
-$config = require __DIR__ . "/../../config/app.php";
 include __DIR__ . "/../../auth.php";
+
+$config = require __DIR__ . "/../../config/app.php";
+
 if (session_status() === PHP_SESSION_NONE) {
   session_start();
 }
+
+$currentUrl = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
 ?>
 
@@ -26,10 +30,17 @@ if (session_status() === PHP_SESSION_NONE) {
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.14.1/themes/base/jquery-ui.css" crossorigin="anonymous">
     <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js" integrity="sha256-9zljDKpE/mQxmaR4V2cGVaQ7arF3CcXxarvgr7Sj8Uc=" crossorigin="anonymous"></script>
 
-    <?php if(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) == '/dashboard' || parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) == '/show-invoise'): ?>
+    <!-- Additional libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/plugin/duration.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/plugin/customParseFormat.js"></script>
+
+    <?php foreach(require __DIR__ . "/../../config/scripts.php" as $src => $paths): ?>
       <!-- Local script file -->
-      <script src="script.js" defer></script>
-    <?php endif ?>
+      <?php if(in_array($currentUrl, $paths, true)): ?>
+      <?php echo '<script src="' . $src . '" defer></script>'; ?>
+      <?php endif ?>
+    <?php endforeach ?>
     
 
 </head>

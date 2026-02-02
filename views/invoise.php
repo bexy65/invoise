@@ -1,12 +1,13 @@
 <?php 
+if (session_status() === PHP_SESSION_NONE) session_start();
+
 $config = require __DIR__ . "/../config/app.php";
-$workers = $config['workers'];
+$workRecords = $config['employee_work_records'];
 $companyInformation = $config['company_information'];
 $workFields = $config['field_types']['work'];
-$currency = $config['currency'] ?? '$'; // fallback to $ if not set
+$currency = $config['currency'] ?? '$';
 $total = 0;
 
-if (session_status() === PHP_SESSION_NONE) session_start();
 
 if (!isset($_SESSION['user'])) {
     header('Location: /login');
@@ -22,11 +23,18 @@ include "components/header.php";
             <button>Edit</button>
             <button>Save</button>
         </div>
+        <div class="col-2 border text-center">
+            <select name="employees" id="employeeSelect" class="w-100">
+               
+            </select>
+        </div>
     </div>
 </div>
 
 <div class="container border">
-    <h3 class="title text-center">Simple Invoice</h3>
+    <div class="my-4">
+        <h3 class="title text-center">Simple Invoice</h3>
+    </div>
 
     <div class="row mb-3">
         <div class="col-6">
@@ -43,7 +51,6 @@ include "components/header.php";
     <table class="table table-bordered">
         <thead class="thead-light">
             <tr>
-                <th>#</th>
                 <?php foreach ($workFields as $fieldKey => $label): ?>
                     <th class="bg-dark text-white">
                         <?php echo $label; ?>
@@ -52,40 +59,12 @@ include "components/header.php";
                 <th class="text-right bg-dark text-white">Total</th>
             </tr>
         </thead>
+        <tbody id="test">
 
-        <tbody>
-            <?php foreach ($workers as $index => $worker): ?>
-                <tr>
-                    <td><?php echo $index + 1; ?></td>
-                    
-                    <?php foreach ($workFields as $fieldKey => $label): ?>
-                        <td>
-                            <?php
-                            if ($fieldKey == 'rate') {
-                                echo $currency . ' ' . $worker[$fieldKey];
-                            } else {
-                                echo $worker[$fieldKey];
-                            }
-                            ?>
-                        </td>
-                    <?php endforeach; ?>
-                    
-                    <td class="text-right">
-                        <?php
-                        $amount = $worker['hours_of_work'] * $worker['rate'];
-                        echo $currency . number_format($amount, 2);
-                        $total += $amount;
-                        ?>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
         </tbody>
 
         <tfoot>
-            <tr>
-                <th colspan="<?php echo count($workFields) + 1; ?>" class="text-right">Total:</th>
-                <th class="text-right"><?php echo $currency . number_format($total, 2); ?></th>
-            </tr>
+            
         </tfoot>
     </table>
 
